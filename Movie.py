@@ -1,6 +1,9 @@
 import fresh_tomatoes
 
 class Movie():
+
+	"""A class used to create movie instances"""
+
     def __init__(self, movie_title, movie_storyline, movie_poster_image_url, movie_youtube_url):
         self.title = movie_title
         self.storyline = movie_storyline

@@ -4,7 +4,6 @@ import urllib
 import requests
 import fresh_tomatoes
 
-
 # My api key for 'themoviedb' 
 api_key = "14c08f8fd0710ca88f23841954112586"
 
@@ -21,10 +20,6 @@ movies = []
 base_image_url = "http://image.tmdb.org/t/p/w342/"
 base_youtube_url = "https://www.youtube.com/watch?v="
 
-
-
-
-
 # Iterates through every movie
 for result in results:
 
@@ -33,9 +28,10 @@ for result in results:
     title = result["title"]
     storyline = result["overview"]
     poster_image_url = base_image_url + result["poster_path"]
-    
 
-    # Makes a GET request for the movie's youtube key. Not included in the previous GET request
+    # Makes a GET request for the movie's youtube key. 
+    # The key is not included in the GET request for 
+    # info about the movie
     base_video_url = "https://api.themoviedb.org/3/movie/" + str(movie_id) + "/videos"     
     payload = dict(api_key=api_key)
     response = requests.request("GET", base_video_url, data=payload)
@@ -43,7 +39,7 @@ for result in results:
     response_text_as_json = json.loads(response_text)
     response_results = response_text_as_json["results"]
 
-    # Some movies doesn't have a youtube key, so we check if there is any 
+    # Some movies don't have a youtube key, so we check if there is any 
     try:
         first_response_result = response_results[0]
 
@@ -54,8 +50,7 @@ for result in results:
         movies.append(movie)
 
     except IndexError:             
-        continue
-       
+        continue  
     
 # Opens the html file
 fresh_tomatoes.open_movies_page(movies)
