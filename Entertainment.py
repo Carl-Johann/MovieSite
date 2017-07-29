@@ -39,19 +39,19 @@ for result in results:
     response_text_as_json = json.loads(response_text)
     response_results = response_text_as_json["results"]
 
-    # Some movies don't have a youtube key, so we check if there is any 
+    # Some movies don't have a youtube key, so we check if there is one 
     try:
         first_response_result = response_results[0]
 
         youtube_key = first_response_result["key"]
         youtube_image_url = base_youtube_url + str(youtube_key)        
-        
+
         movie = Movie.Movie(title, storyline, poster_image_url, youtube_image_url)
         movies.append(movie)
 
     except IndexError:             
         continue  
-    
+
 # Opens the html file
 fresh_tomatoes.open_movies_page(movies)
 
